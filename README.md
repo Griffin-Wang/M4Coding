@@ -305,7 +305,7 @@ IntelliJ Documentation: [Extract Method](https://www.jetbrains.com/help/idea/ext
 1. **Create a helper method and move code into it.**
 
    Apply `Extract Method` to turn the `switch` statement into its own helper method for calculating the base amount
-   for a given performance and play. Name the new method `getAmount`.
+   for a given performance and play. **Name the new method `getAmount`**.
    > **Tip:** select the whole switch statement INCLUDING the declaration for `thisAmount`,
    then IntelliJ's Refactor->Extract Method tool. That declaration is part of the `switch` statement calculation.
 
@@ -328,9 +328,9 @@ IntelliJ Documentation: [Extract Method](https://www.jetbrains.com/help/idea/ext
 
    We'll apply _Replace Temp with Query_ to stop using the parameter. This happens in 2 steps: _Extract Method_, followed by _Inline Variable_.
    
-   1. **Create another tiny helper method and call it.**
+   1. **Create another tiny helper method and call it `getPlay`.**
 
-      Select the expression on the right-hand side of the initialization for variable `play` in the for loop in method `statement`, then use _Extract Method_. `getPlay` is a good name.
+      Select the expression on the right-hand side of the initialization for variable `play` in the for loop in method `statement`, then use _Extract Method_. Name it `getPlay`.
 
    2. **Remove a local variable.**
 
@@ -367,7 +367,7 @@ we can turn our attention to refactoring the part of the code responsible for ca
    Observe that the statements immediately following `// add volume credits` (including the `if` statement) update the volume credits for the current performance `p`. Our helper method will calculate and return the contribution from the current performance.
 
    Highlight those lines of code related to volume credits then 
-   right-click and choose `Refactor -> Extract Method`. Use `getVolumeCredits` as the method name.
+   right-click and choose `Refactor -> Extract Method`. **Use `getVolumeCredits` as the method name**.
 
    - note that this will result in an awkward helper which takes in the current value for volume credits, possibly increments it, then returns it.
    - also, CheckStyle may complain: `Assignment of parameter 'volumeCredits' is not allowed.`
@@ -413,7 +413,7 @@ Follow the steps below to refactor this part of the code.
 
    - Update the FIRST call to `NumberFormat.getCurrencyInstance(Locale.US).format` so that it calls our new helper.
 
-   - `getFormat` does not convey the meaning of the method. It's about US dollars, so rename it to `usd`.
+   - `getFormat` does not convey the meaning of the method. It's about US dollars, so **rename it to `usd`**.
 
    - As a sanity check, our two method calls at this point are `usd(getAmount(p))` and `usd(totalAmount)`. Yours should look similar.
 
@@ -455,11 +455,11 @@ First, we will decouple the logic into three loops, then we will refactor using 
    `Extract Method` and then `Inline Variable` to refactor the calculation of volume credits.
 
    - select the loop for volume credits, including the `int volumeCredits` declaration
-   and apply `Extract Method`. Once that's done, right click on `volumeCredits` and apply
+   and apply `Extract Method`. **Name the method `getTotalVolumeCredits`**. Once that's done, right click on `volumeCredits` and apply
    `Inline Variable`.
    - use the convention of accumulating into a `result` variable as we have done previously.
 
-19. Refactor the `totalAmount` loop using the same `Replace Temp with Query` refactoring from above.
+19. Refactor the `totalAmount` loop using the same `Replace Temp with Query` refactoring from above. **Name the method `getTotalAmount`**. 
 
 20. Update your `log.txt` file and commit the changes to any files.
     Make sure to include the string "Task 2.4" in your commit message.
