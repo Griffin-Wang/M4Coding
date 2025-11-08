@@ -57,11 +57,7 @@ public class NewPlayTypeTests {
             StatementPrinter statementPrinter = new StatementPrinter(invoice, plays);
             String result = statementPrinter.statement();
 
-            // ensure consistent line endings are being used
-            result = result.replace("\r\n", "\n");
-            expected = expected.replace("\r\n", "\n");
-
-            assertEquals(String.format("Actual output:%n%s%nExpected:%s", result, expected), expected, result);
+            assertEquals(result, expected, String.format("Actual output:%n%s%nExpected:%s", result, expected));
         }
     }
 }
