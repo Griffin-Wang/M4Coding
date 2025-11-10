@@ -335,6 +335,7 @@ IntelliJ Documentation: [Extract Method](https://www.jetbrains.com/help/idea/ext
    2. **Remove a local variable.**
 
       Select that same `play` variable in method `statement` and choose Refactor->Inline Variable. This will replace all occurrences of variable `play` in method `statement` with a call to `getPlay`.
+      > If you don't see the `Inline Variable` option, you can use the keyboard shortcut Cmd+Option+N on Mac (Ctrl+Alt+N on Windows) as documented [here](https://www.jetbrains.com/help/idea/inline.html).
 
    3. **Remove a parameter.**
    
