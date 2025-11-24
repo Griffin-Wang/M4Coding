@@ -1,6 +1,8 @@
-fixed tests for the not-for-credit tasks; parameter ordering and ensuring consistent line endings. Jonathan Calver 2025-11-11, 2:36 p.m.
-adding shortcut keys for Inline Variable (Re: Piazza question) Jonathan Calver 2025-11-10, 1:24 p.m.
-clarifying extracted method names in README.md Jonathan Calver 2025-11-08, 2:25 p.m.
-fixing starter file Jonathan Calver 2025-11-08, 2:06 p.m.
-adding starter files Jonathan Calver 2025-11-08, 1:14 p.m.
-first commit Jonathan Calver 2025-11-08, 1:02 p.m.
+80c0b29 refactor: extract amountCentsFor (p.6)
+b8d1996 Task 1.2
+2b4f164 fixed tests for the not-for-credit tasks; parameter ordering and ensuring consistent line endings.
+ff5004e adding shortcut keys for Inline Variable (Re: Piazza question)
+b545fe2 clarifying extracted method names in README.md
+a0124c9 fixing starter file
+c8d9d38 adding starter files
+cbe4517 first commit
