@@ -38,6 +38,7 @@ public class StatementPrinter {
      * @throws RuntimeException if one of the play types is not known
      */
     public String statement() {
+        
         int totalAmount = 0;
         int volumeCredits = 0;
         final StringBuilder result = new StringBuilder(
@@ -51,11 +52,7 @@ public class StatementPrinter {
             final int lineCents = amountCentsFor(p);
 
             // add volume credits
-            volumeCredits += Math.max(p.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
-            // add extra credit for every five comedy attendees
-            if ("comedy".equals(play.getType())) {
-                volumeCredits += p.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
-            }
+            volumeCredits = VolumeCreditsFor(p, volumeCredits, play);
 
             // print line for this order
             final int centsPerDollar = 100;
@@ -67,6 +64,15 @@ public class StatementPrinter {
         result.append(String.format("Amount owed is %s%n", frmt.format(totalAmount / (double) centsPerDollar)));
         result.append(String.format("You earned %s credits%n", volumeCredits));
         return result.toString();
+    }
+
+    private static int VolumeCreditsFor(Performance p, int volumeCredits, Play play) {
+        volumeCredits += Math.max(p.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
+        // add extra credit for every five comedy attendees
+        if ("comedy".equals(play.getType())) {
+            volumeCredits += p.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
+        }
+        return volumeCredits;
     }
 
     private int amountCentsFor(Performance performance) {
