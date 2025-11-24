@@ -1,0 +1,13 @@
+refactor: add usd() & CENTS_PER_DOLLAR; remove local formatters (p.14) griffin12 9 minutes ago bcdfacb2
+refactor: extract volumeCreditsFor (p.14/16) griffin12 17 minutes ago 53cbc13b
+refactor: extract volumeCreditsFor (p.14/16) griffin12 28 minutes ago 5ffbf2f1
+refactor: add playFor() and remove play param from amountCentsFor (p.10/12) griffin12 49 minutes ago c8e1321f
+refactor: rename parameter p->performance (p.10) griffin12 Today 3:20 p.m. 4f51dc21
+refactor: extract amountCentsFor (p.6) griffin12 Today 3:11 p.m. f8c2987a
+Task 1.2 griffin12 2025-11-20, 11:41 p.m. b8d19962
+fixed tests for the not-for-credit tasks; parameter ordering and ensuring consistent line endings. Jonathan Calver 2025-11-11, 2:36 p.m. 2b4f1640
+adding shortcut keys for Inline Variable (Re: Piazza question) Jonathan Calver 2025-11-10, 1:24 p.m. ff5004e7
+clarifying extracted method names in README.md Jonathan Calver 2025-11-08, 2:25 p.m. b545fe22
+fixing starter file Jonathan Calver 2025-11-08, 2:06 p.m. a0124c9a
+adding starter files Jonathan Calver 2025-11-08, 1:14 p.m. c8d9d38c
+first commit Jonathan Calver 2025-11-08, 1:02 p.m. cbe45177

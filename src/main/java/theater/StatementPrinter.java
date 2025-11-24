@@ -41,25 +41,22 @@ public class StatementPrinter {
      */
     public String statement() {
 
-        int totalAmount = 0;
+        int totalCents = 0;
         int volumeCredits = 0;
         final StringBuilder result = new StringBuilder(
                 "Statement for " + invoice.getCustomer() + System.lineSeparator());
 
         for (Performance p : invoice.getPerformances()) {
-            final Play play = plays.get(p.getPlayID());
-
             final int lineCents = amountCentsFor(p);
 
             volumeCredits += volumeCreditsFor(p);
 
             // print line for this order
-            result.append(String.format("  %s: %s (%s seats)%n", play.getName(),
-                    usd(lineCents), p.getAudience()));
-            totalAmount += lineCents;
+            result.append(lineLine(playFor(p).getName(), lineCents, p.getAudience()));
+            totalCents += lineCents;
         }
-        result.append(String.format("Amount owed is %s%n", usd(totalAmount)));
-        result.append(String.format("You earned %s credits%n", volumeCredits));
+        result.append(totalLine(totalCents));
+        result.append(creditsLine(volumeCredits));
         return result.toString();
     }
 
@@ -111,4 +108,17 @@ public class StatementPrinter {
     private String usd(int cents) {
         return currency.format(cents / (double) CENTS_PER_DOLLAR);
     }
+
+    private String lineLine(String playName, int cents, int audience) {
+        return String.format("  %s: %s (%s seats)%n", playName, usd(cents), audience);
+    }
+
+    private String totalLine(int totalCents) {
+        return String.format("Amount owed is %s%n", usd(totalCents));
+    }
+
+    private String creditsLine(int credits) {
+        return String.format("You earned %s credits%n", credits);
+    }
+
 }
