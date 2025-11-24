@@ -8,8 +8,10 @@ import java.util.Map;
  * This class generates a statement for a given invoice of performances.
  */
 public class StatementPrinter {
+    private static final int CENTS_PER_DOLLAR = 100;
     private Invoice invoice;
     private Map<String, Play> plays;
+    private final NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.US);
 
     public StatementPrinter(Invoice invoice, Map<String, Play> plays) {
         this.invoice = invoice;
@@ -44,8 +46,6 @@ public class StatementPrinter {
         final StringBuilder result = new StringBuilder(
                 "Statement for " + invoice.getCustomer() + System.lineSeparator());
 
-        final NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
-
         for (Performance p : invoice.getPerformances()) {
             final Play play = plays.get(p.getPlayID());
 
@@ -54,13 +54,11 @@ public class StatementPrinter {
             volumeCredits += volumeCreditsFor(p);
 
             // print line for this order
-            final int centsPerDollar = 100;
             result.append(String.format("  %s: %s (%s seats)%n", play.getName(),
-                    frmt.format(lineCents / (double) centsPerDollar), p.getAudience()));
+                    usd(lineCents), p.getAudience()));
             totalAmount += lineCents;
         }
-        final int centsPerDollar = 100;
-        result.append(String.format("Amount owed is %s%n", frmt.format(totalAmount / (double) centsPerDollar)));
+        result.append(String.format("Amount owed is %s%n", usd(totalAmount)));
         result.append(String.format("You earned %s credits%n", volumeCredits));
         return result.toString();
     }
@@ -108,5 +106,9 @@ public class StatementPrinter {
 
     private Play playFor(Performance performance) {
         return plays.get(performance.getPlayID());
+    }
+
+    private String usd(int cents) {
+        return currency.format(cents / (double) CENTS_PER_DOLLAR);
     }
 }
