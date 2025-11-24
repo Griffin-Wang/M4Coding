@@ -48,7 +48,7 @@ public class StatementPrinter {
         for (Performance p : invoice.getPerformances()) {
             final Play play = plays.get(p.getPlayID());
 
-            final int lineCents = amountCentsFor(p, play);
+            final int lineCents = amountCentsFor(p);
 
             // add volume credits
             volumeCredits += Math.max(p.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
@@ -69,9 +69,9 @@ public class StatementPrinter {
         return result.toString();
     }
 
-    private static int amountCentsFor(Performance performance, Play play) {
+    private int amountCentsFor(Performance performance) {
         int thisAmount = 0;
-        switch (play.getType()) {
+        switch (playFor(performance).getType()) {
             case "tragedy": {
                 final int tragedyBasePriceCents = 40_000;
                 final int tragedyExtraPerAudienceCents = 1_000;
@@ -93,8 +93,12 @@ public class StatementPrinter {
                 thisAmount += Constants.COMEDY_AMOUNT_PER_AUDIENCE * performance.getAudience();
                 break;
             default:
-                throw new RuntimeException(String.format("unknown type: %s", play.getType()));
+                throw new RuntimeException(String.format("unknown type: %s", playFor(performance).getType()));
         }
         return thisAmount;
+    }
+
+    private Play playFor(Performance performance) {
+        return plays.get(performance.getPlayID());
     }
 }
