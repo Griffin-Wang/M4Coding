@@ -47,12 +47,12 @@ public class StatementPrinter {
                 "Statement for " + invoice.getCustomer() + System.lineSeparator());
 
         for (Performance p : invoice.getPerformances()) {
-            final int lineCents = amountCentsFor(p);
+            final int lineCents = getAmount(p);
 
-            volumeCredits += volumeCreditsFor(p);
+            volumeCredits += getVolumeCredits(p);
 
             // print line for this order
-            result.append(lineLine(playFor(p).getName(), lineCents, p.getAudience()));
+            result.append(lineLine(getPlay(p).getName(), lineCents, p.getAudience()));
             totalCents += lineCents;
         }
         result.append(totalLine(totalCents));
@@ -60,8 +60,8 @@ public class StatementPrinter {
         return result.toString();
     }
 
-    private int volumeCreditsFor(Performance performance) {
-        final Play play = playFor(performance);
+    private int getVolumeCredits(Performance performance) {
+        final Play play = getPlay(performance);
 
         int credits = Math.max(
                 performance.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
@@ -72,9 +72,9 @@ public class StatementPrinter {
         return credits;
     }
 
-    private int amountCentsFor(Performance performance) {
+    private int getAmount(Performance performance) {
         int thisAmount = 0;
-        switch (playFor(performance).getType()) {
+        switch (getPlay(performance).getType()) {
             case "tragedy": {
                 final int tragedyBasePriceCents = 40_000;
                 final int tragedyExtraPerAudienceCents = 1_000;
@@ -96,12 +96,12 @@ public class StatementPrinter {
                 thisAmount += Constants.COMEDY_AMOUNT_PER_AUDIENCE * performance.getAudience();
                 break;
             default:
-                throw new RuntimeException(String.format("unknown type: %s", playFor(performance).getType()));
+                throw new RuntimeException(String.format("unknown type: %s", getPlay(performance).getType()));
         }
         return thisAmount;
     }
 
-    private Play playFor(Performance performance) {
+    private Play getPlay(Performance performance) {
         return plays.get(performance.getPlayID());
     }
 
@@ -119,6 +119,22 @@ public class StatementPrinter {
 
     private String creditsLine(int credits) {
         return String.format("You earned %s credits%n", credits);
+    }
+
+    private int getTotalAmount() {
+        int result = 0;
+        for (Performance p : invoice.getPerformances()) {
+            result += getAmount(p);
+        }
+        return result;
+    }
+
+    private int getTotalVolumeCredits() {
+        int result = 0;
+        for (Performance p : invoice.getPerformances()) {
+            result += getVolumeCredits(p);
+        }
+        return result;
     }
 
 }
