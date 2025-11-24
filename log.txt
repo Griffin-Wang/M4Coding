@@ -1,7 +1,8 @@
-refactor: add usd() & CENTS_PER_DOLLAR; remove local formatters (p.14) griffin12 9 minutes ago bcdfacb2
-refactor: extract volumeCreditsFor (p.14/16) griffin12 17 minutes ago 53cbc13b
-refactor: extract volumeCreditsFor (p.14/16) griffin12 28 minutes ago 5ffbf2f1
-refactor: add playFor() and remove play param from amountCentsFor (p.10/12) griffin12 49 minutes ago c8e1321f
+refactor: extract render helpers for lines/totals refactor: rename totals/vars to include units (p.17) griffin12 2 minutes ago bc18675b
+refactor: add usd() & CENTS_PER_DOLLAR; remove local formatters (p.14) griffin12 17 minutes ago bcdfacb2
+refactor: extract volumeCreditsFor (p.14/16) griffin12 25 minutes ago 53cbc13b
+refactor: extract volumeCreditsFor (p.14/16) griffin12 37 minutes ago 5ffbf2f1
+refactor: add playFor() and remove play param from amountCentsFor (p.10/12) griffin12 58 minutes ago c8e1321f
 refactor: rename parameter p->performance (p.10) griffin12 Today 3:20 p.m. 4f51dc21
 refactor: extract amountCentsFor (p.6) griffin12 Today 3:11 p.m. f8c2987a
 Task 1.2 griffin12 2025-11-20, 11:41 p.m. b8d19962
