@@ -69,7 +69,7 @@ public class StatementPrinter {
         return result.toString();
     }
 
-    private static int amountCentsFor(Performance per, Play play) {
+    private static int amountCentsFor(Performance performance, Play play) {
         int thisAmount = 0;
         switch (play.getType()) {
             case "tragedy": {
@@ -77,20 +77,20 @@ public class StatementPrinter {
                 final int tragedyExtraPerAudienceCents = 1_000;
                 final int tragedyAudienceThreshold = Constants.TRAGEDY_AUDIENCE_THRESHOLD;
                 thisAmount = tragedyBasePriceCents;
-                if (per.getAudience() > tragedyAudienceThreshold) {
+                if (performance.getAudience() > tragedyAudienceThreshold) {
                     thisAmount += tragedyExtraPerAudienceCents
-                            * (per.getAudience() - tragedyAudienceThreshold);
+                            * (performance.getAudience() - tragedyAudienceThreshold);
                 }
                 break;
             }
             case "comedy":
                 thisAmount = Constants.COMEDY_BASE_AMOUNT;
-                if (per.getAudience() > Constants.COMEDY_AUDIENCE_THRESHOLD) {
+                if (performance.getAudience() > Constants.COMEDY_AUDIENCE_THRESHOLD) {
                     thisAmount += Constants.COMEDY_OVER_BASE_CAPACITY_AMOUNT
                             + (Constants.COMEDY_OVER_BASE_CAPACITY_PER_PERSON
-                            * (per.getAudience() - Constants.COMEDY_AUDIENCE_THRESHOLD));
+                            * (performance.getAudience() - Constants.COMEDY_AUDIENCE_THRESHOLD));
                 }
-                thisAmount += Constants.COMEDY_AMOUNT_PER_AUDIENCE * per.getAudience();
+                thisAmount += Constants.COMEDY_AMOUNT_PER_AUDIENCE * performance.getAudience();
                 break;
             default:
                 throw new RuntimeException(String.format("unknown type: %s", play.getType()));
